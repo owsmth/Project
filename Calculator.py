@@ -1,6 +1,6 @@
 print("Hello! Welcome to The Calculator App!")
 
-def add(a,b):
+def add(a,b):      #Defines add function
     return a + b
 
 def subtract(a,b):
