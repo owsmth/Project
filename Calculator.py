@@ -1,46 +1,41 @@
 print("Hello! Welcome to The Calculator App!")
 
-def add(a,b):      #Defines add function
-    return a + b
-
-def subtract(a,b):
-    return a - b
-
-def multiply(a,b):
-    return a * b
-
-def divide(a,b):
-    return a/b
-
-def exponent(a,b):
-    return (a**b)
-
-print("To begin, please enter an operator. (+,-,*,/,**)")
+result = 0  # Initialize the result variable
 
 while True:
-    choice = input("Enter Choice: ")
+    try:
+        # Input for the operator
+        operator = input("Enter an operator (+, -, *, /, **) or 'n' to exit: ")
 
-    if choice in ("+", "-", "*", "/","**"):
-        try:
-            number1 = float(input("Enter First Number: "))
-            number2 = float(input("Enter Second Number: "))
-        except ValueError:
-            print("Please enter a valid number.")
-            continue 
-        
-        if choice == "+":
-            print(number1, "+", number2, "=", add(number1, number2))
-        elif choice == "-":
-            print(number1, "-", number2, "=", subtract(number1, number2))
-        elif choice == "*":
-            print(number1, "*", number2, "=", multiply(number1, number2))
-        elif choice == "/":
-            print(number1, "/", number2, "=", divide(number1, number2))
-        elif choice == "**":
-            print(number1, "^", number2, "=", exponent(number1, number2)) 
-
-        next_calculation = input("Would you like to do another calculation? (y/n): ")
-        if next_calculation == "n":
+        if operator.lower() == 'n':
             break
-    else:
-        print("Invalid Input")
+
+        # Input for the next number
+        number = float(input("Enter the next number: "))
+
+        # Perform the calculation based on the operator
+        if operator == "+":
+            result += number
+        elif operator == "-":
+            result -= number
+        elif operator == "*":
+            result *= number
+        elif operator == "/":
+            if number == 0:
+                print("Error! Division by zero is not allowed.")
+                continue
+            result /= number
+        elif operator == "**":
+            result **= number
+        else:
+            print("Invalid operator! Please enter a valid operator.")
+            continue
+
+        print("Current Result:", result)
+
+    except ValueError:
+        print("Invalid input! Please enter a valid number.")
+    except Exception as e:
+        print("Error:", e)
+
+print("Thank you for using The Calculator App! Final Result:", result)
